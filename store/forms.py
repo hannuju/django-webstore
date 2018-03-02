@@ -1,7 +1,7 @@
 from django import forms
 from store.models import Item
 
-class HomeForm(forms.ModelForm):
+class AddItemForm(forms.ModelForm):
     title = forms.CharField()
     description = forms.CharField()
     price = forms.DecimalField()

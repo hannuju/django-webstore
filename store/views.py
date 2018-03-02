@@ -1,7 +1,7 @@
 
 from django.views import generic
 
-from store.forms import HomeForm
+from store.forms import AddItemForm
 from .models import Item
 
 class IndexView(generic.ListView):
@@ -10,7 +10,7 @@ class IndexView(generic.ListView):
 
 class AddItemView(generic.FormView):
     template_name = 'store/add_item.html'
-    form_class = HomeForm
+    form_class = AddItemForm
     success_url = '/store/'
 
     def form_valid(self, form):
