@@ -8,16 +8,11 @@
             <th>Product ID</th>
             <th>Title</th>
             <th>Price</th>
-            <!--
-            {% for field in fields %}
-            <th> {{ field.name }}</th>
-            {% endfor %}
-            -->
         </tr>
         {% for item in item_list %}
         <tr>
             <td>{{ item.id }}</td>
-            <td>{{ item.title }}</td>
+            <td><a href="{% url 'store:detail' item.id %}">{{ item.title }}</a></td>
             <td>{{ item.price}}</td>
         </tr>
         {% endfor %}
