@@ -1,22 +1,24 @@
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
-from django.views import generic
+#from store.forms import SearchForm
+from store.models import Item
 
-from store.forms import AddItemForm
-from .models import Item
-
-class IndexView(generic.ListView):
+class IndexView(ListView):
     model = Item
     template_name = 'store/index.html'
 
-class DetailView(generic.DetailView):
+class DetailView(DetailView):
     model = Item
-    template_name = 'store/detail.html'
 
-class AddItemView(generic.FormView):
-    template_name = 'store/add_item.html'
-    form_class = AddItemForm
-    success_url = '/store/'
+class ItemCreate(CreateView):
+    model = Item
+    fields = ['title', 'description', 'price']
 
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
+class ItemUpdate(UpdateView):
+    model = Item
+    fields = ['title', 'description', 'price']
+
+class ItemDelete(DeleteView):
+    model = Item
+    success_url = reverse_lazy('item-list')

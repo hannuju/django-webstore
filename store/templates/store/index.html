@@ -2,6 +2,7 @@
 
 {% block body %}
 <div class="container">
+    <p>{% include 'store/testii.html' %}</p>
     {% if item_list %}
     <table class="table table-dark table-striped table-bordered">
         <tr>
@@ -20,6 +21,6 @@
     {% else %}
     <p>No items in store!</p>
     {% endif %}
-    <a href="add_item">Add item</a>
+    <a href="item/add">Add item</a>
 </div>
 {% endblock %}

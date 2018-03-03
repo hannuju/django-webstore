@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+    <h2>{{ item.title}}</h2>
+    <table class="table table-dark table-striped table-bordered">
+        <tr>
+            <th>Product ID</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+        <tr>
+            <th>{{ item.id }}</th>
+            <th>{{ item.description }}</th>
+            <th>{{ item.price }}</th>
+        </tr>
+    </table>
+    <a href="update">Update item</a>
+    <a href="delete">Delete item</a>
+</div>
+{% endblock %}
