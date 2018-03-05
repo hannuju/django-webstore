@@ -35,11 +35,13 @@ class ItemDelete(DeleteView):
     success_url = reverse_lazy('item-list')
 
 def CartView(request):
-    context = {}
-    print(request.session.session_key)
     # Add cart to context if it exists
     if request.session.session_key in Cart.carts:
+        print("[INFO] Cart found!")
         context = {'obj' : Cart.carts[request.session.session_key]}
+    else:
+        print("[INFO] Cart NOT found!")
+        context = {}
     return render(request, 'store/cart.html', context = context)
 
 # AJAX call
