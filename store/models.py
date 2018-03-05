@@ -6,6 +6,9 @@ class Item(models.Model):
     description = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=6, decimal_places=2)
 
+    def __str__(self):
+        return self.title
+
     def get_absolute_url(self):
         return "/store/item/%i/" % self.id
         #return reverse('item.views.details', args=[str(self.id)])

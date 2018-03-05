@@ -2,7 +2,7 @@
 
 {% block body %}
 <div class="container">
-    <p>{% include 'store/testii.html' %}</p>
+    <a href="item/add">Add item</a>
     <form method="GET" action="">
         <input name="q" type="text" placeholder="Search..."/>
     </form>
@@ -18,12 +18,39 @@
             <td>{{ item.id }}</td>
             <td><a href="{% url 'store:detail' item.id %}">{{ item.title }}</a></td>
             <td>{{ item.price}}</td>
+            <td>
+                <button class="my_button" name="buttonName" value="{{ item.id }}">Add to cart</button>
+            </td>
         </tr>
         {% endfor %}
     </table>
     {% else %}
     <p>No items found!</p>
     {% endif %}
-    <a href="item/add">Add item</a>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('.my_button').click(function() {
+            fetch("/store/item/" + $(this).attr("value") + "/add_to_cart", {
+                credentials: "same-origin"
+            })
+            .then((response) => {
+                if(response.ok) {
+                    return response;
+                }
+                throw new Error("Response was not ok");
+            }).then((myBlob) => {
+                console.log(myBlob.text());
+            }).catch((error) => {
+                console.log("There was a problem fetching your information: ", error.message);
+            });
+        });
+    });
+    </script>
+
 </div>
 {% endblock %}
+<!--fetch("http://127.0.0.1:8000/store/item" + id + "/add_to_cart")
+alert($(this).attr("value"));
+.then(response => console.log('Success:', response.text()));
+-->

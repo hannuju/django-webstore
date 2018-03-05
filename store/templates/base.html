@@ -5,17 +5,28 @@
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
+        <script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+        crossorigin="anonymous">
+        </script>
         {% block head %}
         <title>Store</title>
         {% endblock %}
     </head>
     <body>
+
         <div class="container">
             <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
                 <a class="navbar-brand" href="/store">Home</a>
+                <a class="navbar-brand" href="/store/cart">Cart</a>
             </nav>
         </div>
         {% block body %}
         {% endblock %}
+
+        {% load static %}
+        <!--<script src="{% static 'store/myscript.js' %}"></script>-->
+
     </body>
 </html>

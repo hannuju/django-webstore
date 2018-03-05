@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+    <h2>Cart</h2>
+    {% if obj.cart %}
+    <table class="table table-dark table-striped table-bordered">
+        <tr>
+            <th>Product ID</th>
+            <th>Title</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+        {% for key, value in obj.cart.items %}
+        <tr>
+            <td>{{ key }}</th>
+            <td>{{ value.title }}</td>
+            <td>{{ value.quantity }}</td>
+            <td>{{ value.price }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td>Total</td>
+            <td></td>
+            <td>{{ obj.cartQty }}</td>
+            <td>{{ obj.cartPrice }}</td>
+        </tr>
+    </table>
+    {% else %}
+    <p>No items in your cart</p>
+    {% endif %}
+</div>
+{% endblock %}
