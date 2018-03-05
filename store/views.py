@@ -12,8 +12,8 @@ class IndexView(ListView):
     template_name = 'store/index.html'
 
     def get_queryset(self):
-        if not self.request.session.session_key:
-            self.request.session.save()
+        #if not self.request.session.session_key:
+        #    self.request.session.save()
 
         # Search with SQL-query "Like"
         query = self.request.GET.get('q')
@@ -45,7 +45,8 @@ class ItemDelete(DeleteView):
 
 def CartView(request):
     # Add cart to context if it exists
-    key = request.session.session_key
+    #key = request.session.session_key
+    key = "123"
     print(key)
     if key in Cart.carts.keys():
         print("[INFO] Cart found!")
@@ -59,7 +60,8 @@ def CartView(request):
 def addToCart(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
     # Create cart if it doesn't exist, then add item to cart
-    key = request.session.session_key
+    #key = request.session.session_key
+    key = "123"
     if not key in Cart.carts:
         Cart.carts[key] = Cart()
     Cart.carts[key].add_item(item)
