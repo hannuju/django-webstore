@@ -1,49 +1,20 @@
-# Heroku Django Starter Template
+# Webstore created with Django
 
-An utterly fantastic project starter template for Django 2.0.
+This is a closed project, but feel free to browse the source.
+
+App deployed to Heroku: https://django-webstore.herokuapp.com/store/
 
 ## Features
 
-- Production-ready configuration for Static Files, Database Settings, Gunicorn, etc.
-- Enhancements to Django's static file serving functionality via WhiteNoise.
-- Latest Python 3.6 runtime environment.
+- Python 3.6 runtime environment
+- Django Web Framework
+- JawsDB MySQL
+- Heroku Django Starter Template
 
 ## How to Use
 
-To use this project, follow these steps:
+$ pipenv run manage.py runserver - to run the project locally
 
-1. Create your working environment.
-2. Install Django (`$ pipenv install django`)
-3. Create a new project using this template
+pipenv automatically runs .env file where the MySQL configurations are done
 
-## Creating Your Project
-
-Using this template to create a new Django app is easy::
-
-    $ django-admin.py startproject --template=https://github.com/heroku/heroku-django-template/archive/master.zip --name=Procfile helloworld
-
-(If this doesn't work on windows, replace `django-admin.py` with `django-admin`)
-
-You can replace ``helloworld`` with your desired project name.
-
-## Deployment to Heroku
-
-    $ git init
-    $ git add -A
-    $ git commit -m "Initial commit"
-
-    $ heroku create
-    $ git push heroku master
-
-    $ heroku run python manage.py migrate
-
-See also, a [ready-made application](https://github.com/heroku/python-getting-started), ready to deploy.
-
-
-## License: MIT
-
-## Further Reading
-
-- [Gunicorn](https://warehouse.python.org/project/gunicorn/)
-- [WhiteNoise](https://warehouse.python.org/project/whitenoise/)
-- [dj-database-url](https://warehouse.python.org/project/dj-database-url/)
+When deployed to heroku database configurations are set by JawsDB MySQL
