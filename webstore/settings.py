@@ -78,8 +78,6 @@ WSGI_APPLICATION = 'webstore.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-SESSION_COOKIE_HTTPONLY = False
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
