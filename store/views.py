@@ -45,10 +45,11 @@ class ItemDelete(DeleteView):
 
 def CartView(request):
     # Add cart to context if it exists
-    print(request.session.session_key)
-    if request.session.session_key in Cart.carts.keys():
+    key = request.session.session_key
+    print(key)
+    if key in Cart.carts.keys():
         print("[INFO] Cart found!")
-        context = {'obj' : Cart.carts[request.session.session_key]}
+        context = {'obj' : Cart.carts[key]}
     else:
         print("[INFO] Cart NOT found!")
         context = {}
@@ -58,7 +59,8 @@ def CartView(request):
 def addToCart(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
     # Create cart if it doesn't exist, then add item to cart
-    if not request.session.session_key in Cart.carts:
-        Cart.carts[request.session.session_key] = Cart()
-    Cart.carts[request.session.session_key].add_item(item)
+    key = request.session.session_key
+    if not key in Cart.carts:
+        Cart.carts[key] = Cart()
+    Cart.carts[key].add_item(item)
     return HttpResponse("Yeees!")
