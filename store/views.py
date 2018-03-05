@@ -46,7 +46,7 @@ class ItemDelete(DeleteView):
 def CartView(request):
     # Add cart to context if it exists
     print(request.session.session_key)
-    if request.session.session_key in Cart.carts:
+    if request.session.session_key in Cart.carts.keys():
         print("[INFO] Cart found!")
         context = {'obj' : Cart.carts[request.session.session_key]}
     else:
