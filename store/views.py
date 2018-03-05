@@ -47,14 +47,14 @@ def CartView(request):
     # Add cart to context if it exists
     #key = request.session.session_key
     key = "123"
+    print(Cart.carts)
     #print(key)
-    for x in range(0, 20):
-        if key in Cart.carts.keys():
-            print("[INFO] Cart found!")
-            context = {'obj' : Cart.carts[key]}
-        else:
-            print("[INFO] Cart NOT found!")
-            context = {}
+    if key in Cart.carts.keys():
+        print("[INFO] Cart found!")
+        context = {'obj' : Cart.carts[key]}
+    else:
+        print("[INFO] Cart NOT found!")
+        context = {}
 
     return render(request, 'store/cart.html', context = context)
 
