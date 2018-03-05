@@ -12,12 +12,21 @@ class IndexView(ListView):
     template_name = 'store/index.html'
 
     def get_queryset(self):
+        if not self.request.session.session_key:
+            self.request.session.save()
+
         # Search with SQL-query "Like"
         query = self.request.GET.get('q')
+        #print(query)
+        #queryy = self.request.GET.get('qq')
+        #print(queryy)
         if query:
-            return Item.objects.filter(Q(id__icontains=query) | Q(title__icontains=query))
+            return Item.objects.filter(Q(id__icontains=query) | Q(title__icontains=query)).order_by('-price')
         else:
             return Item.objects.all()
+            #return Item.objects.order_by('title')
+
+
 
 class DetailView(DetailView):
     model = Item
