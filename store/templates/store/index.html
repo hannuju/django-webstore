@@ -32,7 +32,7 @@
     $(document).ready(function() {
         $('.my_button').click(function() {
             fetch("/store/item/" + $(this).attr("value") + "/add_to_cart", {
-                credentials: "same-origin"
+                credentials: "include"
             })
             .then((response) => {
                 if(response.ok) {
