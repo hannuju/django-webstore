@@ -7,12 +7,14 @@ from django.db.models import Q
 from store.models import Item
 from store.cart import Cart
 
+carts = {}
+
 class IndexView(ListView):
     model = Item
     template_name = 'store/index.html'
 
     def get_queryset(self):
-        print(Cart.carts)
+        print(carts)
         #if not self.request.session.session_key:
         #    self.request.session.save()
 
@@ -48,11 +50,11 @@ def CartView(request):
     # Add cart to context if it exists
     #key = request.session.session_key
     key = "123"
-    print(len(Cart.carts))
+    print(len(carts))
     #print(key)
-    if key in Cart.carts.keys():
+    if key in carts.keys():
         print("[INFO] Cart found!")
-        context = {'obj' : Cart.carts[key]}
+        context = {'obj' : carts[key]}
     else:
         print("[INFO] Cart NOT found!")
         context = {}
@@ -65,7 +67,7 @@ def addToCart(request, item_id):
     # Create cart if it doesn't exist, then add item to cart
     #key = request.session.session_key
     key = "123"
-    if not key in Cart.carts:
-        Cart.carts[key] = Cart()
-    Cart.carts[key].add_item(item)
+    if not key in carts:
+        carts[key] = Cart()
+    carts[key].add_item(item)
     return HttpResponse("Yeees!")

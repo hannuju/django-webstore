@@ -1,5 +1,4 @@
 class Cart():
-    carts = {}
 
     def __init__(self):
         self.cartPrice = 0 # Total price of cart
