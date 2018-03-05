@@ -12,6 +12,7 @@ class IndexView(ListView):
     template_name = 'store/index.html'
 
     def get_queryset(self):
+        print(Cart.carts)
         #if not self.request.session.session_key:
         #    self.request.session.save()
 
