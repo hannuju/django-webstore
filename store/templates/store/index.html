@@ -2,7 +2,6 @@
 
 {% block body %}
 <div class="container">
-    <p>{{ request.session.session_key }}</p>
     <a href="item/add">Add item</a>
     <form method="GET" action="">
         <input name="q" type="text" placeholder="Search..." value="{{ view.kwargs.q }}"/>
