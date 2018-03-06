@@ -8,36 +8,22 @@ from django.db.models import Q
 from store.models import Item
 from store.cart import Cart
 
-def addItemToCart(item):
-    print("[LOCAL CACHE] Adding item to cart.")
-    if cache.get('123') is None:
-        cache.set('123', Cart())
-
-    x = cache.get('123')
-    x.add_item(item)
-    cache.set('123', x)
-
-
 class IndexView(ListView):
     model = Item
     template_name = 'store/index.html'
 
     def get_queryset(self):
-        #if not self.request.session.session_key:
-        #    self.request.session.save()
+        # Save the session key first time opening the index page
+        if not self.request.session.session_key:
+            self.request.session.save()
 
         # Search with SQL-query "Like"
         query = self.request.GET.get('q')
-        #print(query)
-        #queryy = self.request.GET.get('qq')
-        #print(queryy)
         if query:
             return Item.objects.filter(Q(id__icontains=query) | Q(title__icontains=query)).order_by('-price')
         else:
             return Item.objects.all()
             #return Item.objects.order_by('title')
-
-
 
 class DetailView(DetailView):
     model = Item
@@ -56,28 +42,25 @@ class ItemDelete(DeleteView):
 
 def CartView(request):
     # Add cart to context if it exists
-    #key = request.session.session_key
-    key = "123"
-    #print(cache.get('123').cart)
-    #print(len(cache.get('123').cart))
-    #print(key)
-    if not cache.get('123') is None:
+    key = request.session.session_key
+    print(key)
+    if not cache.get(key) is None:
         print("[INFO] Cart found!")
-        context = {'obj' : cache.get('123')}
+        context = {'obj' : cache.get(key)}
     else:
         print("[INFO] Cart NOT found!")
         context = {}
-
     return render(request, 'store/cart.html', context = context)
 
 # AJAX call
 def addToCart(request, item_id):
+    key = request.session.session_key
+    print(key)
     item = get_object_or_404(Item, pk=item_id)
-    addItemToCart(item)
     # Create cart if it doesn't exist, then add item to cart
-    #key = request.session.session_key
-    #key = "123"
-    #if not key in carts:
-    #    carts[key] = Cart()
-    #carts[key].add_item(item)
+    if cache.get(key) is None:
+        cache.set(key, Cart())
+    userCart = cache.get(key)
+    userCart.add_item(item)
+    cache.set(key, userCart, 600) # expire timer = 10 min
     return HttpResponse("Yeees!")
