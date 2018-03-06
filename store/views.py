@@ -4,16 +4,8 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 
 from django.db.models import Q
-from store.models import Item
+from store.models import Item, carts
 from store.cart import Cart
-
-print('Adding hardcoded values in dictionary')
-carts = {'avain': 'arvo'}
-carts['456'] = Cart()
-item = get_object_or_404(Item, pk=26)
-carts['456'].add_item(item)
-print('Hardcoded values added')
-print(carts)
 
 def addItemToCart(item):
     print("Cart adding was called")
