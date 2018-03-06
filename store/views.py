@@ -49,7 +49,7 @@ class ItemUpdate(UpdateView):
 
 class ItemDelete(DeleteView):
     model = Item
-    success_url = reverse_lazy('item-list')
+    success_url = reverse_lazy('store:index')
 
 # Renders cart view with user's cart object if it exists in database cache
 def CartView(request):

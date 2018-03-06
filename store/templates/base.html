@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'store/style.css' %}" />
         <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -15,13 +17,14 @@
         {% endblock %}
     </head>
     <body>
-
         <div class="container">
-            <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-                <a class="navbar-brand" href="/store">Home</a>
-                <a class="navbar-brand" href="/store/cart">Cart</a>
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="/store">Store</a>
+                    <a class="nav-item nav-link" href="/store/cart">Cart</a>
+                </div>
             </nav>
-        </div>
+        </div><br>
         {% block body %}
         {% endblock %}
 

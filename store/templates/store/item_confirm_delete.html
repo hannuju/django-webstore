@@ -2,6 +2,11 @@
 
 {% block body %}
 <div class="container">
-    <p>You are about to delete</p>
+    <form action="" method="post">{% csrf_token %}
+        <p>Are you sure you want to delete <b>{{ object }}</b>?</p>
+        <input type="submit" value="Confirm" />
+    </form>
+    <br>
+    <a href="{% url 'store:detail' item.id %}" >No, get me back!</a>
 </div>
 {% endblock %}

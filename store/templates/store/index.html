@@ -1,28 +1,36 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<div class="container">
-    <a href="item/add">Add item</a>
-    <form method="GET" action="">
-        <input name="q" type="text" placeholder="Search..." value="{{ lastquery }}"/><br><br>
-        <input type="radio" name="qq" value="id">ID<br>
-        <input type="radio" name="qq" value="title">Title<br>
-        <input type="radio" name="qq" value="price">Price<br>
-        <button type="submit">Filter</button>
-    </form>
 
+<div class="container">
+    <form method="GET" action="">
+        <div class="col-lg-5" >
+            <input name="q" type="text" placeholder="Search..." value="{{ lastquery }}"/><br><br>
+        </div>
+        <div class="col-lg-5">
+            <p>Order by:</p>
+            <input type="radio" name="qq" value="id" checked>ID#<br>
+            <input type="radio" name="qq" value="title">Title<br>
+            <input type="radio" name="qq" value="price">Price<br><br>
+        </div>
+        <button type="submit">Apply</button>
+    </form><br>
+</div>
+
+<div class="container">
     {% if item_list %}
-    <table class="table table-dark table-striped table-bordered">
-        <tr>
-            <th>Product ID</th>
+    <table class="table table-dark table-striped table-hover">
+        <tr class="row-with-button">
+            <th>Product ID#</th>
             <th>Title</th>
             <th>Price</th>
+            <th></th>
         </tr>
         {% for item in item_list %}
-        <tr>
-            <td>{{ item.id }}</td>
-            <td><a href="{% url 'store:detail' item.id %}">{{ item.title }}</a></td>
-            <td>{{ item.price}}</td>
+        <tr class="row-with-button">
+            <td class="clickable-cell" data-href="{% url 'store:detail' item.id %}">{{ item.id }}</td>
+            <td class="clickable-cell" data-href="{% url 'store:detail' item.id %}">{{ item.title }}</a></td>
+            <td class="clickable-cell" data-href="{% url 'store:detail' item.id %}">{{ item.price}}</td>
             <td>
                 <button class="my_button" name="buttonName" value="{{ item.id }}">Add to cart</button>
             </td>
@@ -32,6 +40,10 @@
     {% else %}
     <p>No items found!</p>
     {% endif %}
+
+    <hr>
+    <a href="item/add">Add new item</a>
+    <br><br>
 
     <script type="text/javascript">
     $(document).ready(function() {
@@ -49,6 +61,14 @@
             }).catch((error) => {
                 console.log("There was a problem fetching your information: ", error.message);
             });
+        });
+    });
+    </script>
+
+    <script type="text/javascript">
+    $(document).ready(function($) {
+        $(".clickable-cell").click(function() {
+            window.location = $(this).data("href");
         });
     });
     </script>
