@@ -7,7 +7,7 @@ from django.db.models import Q
 from store.models import Item
 from store.cart import Cart
 
-carts = {}
+carts = {'avain': 'arvo'}
 
 class IndexView(ListView):
     model = Item
