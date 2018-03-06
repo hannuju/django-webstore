@@ -12,17 +12,29 @@ class IndexView(ListView):
     model = Item
     template_name = 'store/index.html'
 
+    # Passes user's last search keyword to template
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get('q')
+        if query is None:
+            query = ""
+        context['lastquery'] = query
+        return context
+
+    # Initializes session by calling session.save() if it doesn't exists
+    # SQL-query "Like" by user's input to the search field
+    # Order by chosen radio button, default ordering by id if not chosen
     def get_queryset(self):
-        # First time opening the index page save the session to create a session key
         if not self.request.session.session_key:
             self.request.session.save()
-        # Search with SQL-query "Like"
-        query = self.request.GET.get('q')
+        query = self.request.GET.get('q') # Search input by user
+        ordering = self.request.GET.get('qq') # Radio button choice for ordering
+        if ordering is None:
+            ordering = "id"
         if query:
-            return Item.objects.filter(Q(id__icontains=query) | Q(title__icontains=query)).order_by('-price')
+            return Item.objects.filter(Q(id__icontains=query) | Q(title__icontains=query)).order_by(ordering)
         else:
-            return Item.objects.all()
-            #return Item.objects.order_by('title')
+            return Item.objects.order_by(ordering)
 
 class DetailView(DetailView):
     model = Item
@@ -39,22 +51,23 @@ class ItemDelete(DeleteView):
     model = Item
     success_url = reverse_lazy('item-list')
 
+# Renders cart view with user's cart object if it exists in database cache
 def CartView(request):
     key = request.session.session_key
     context = {}
-    # Add users cart to context if it exists
     if not cache.get(key) is None:
         context = {'obj' : cache.get(key)}
     return render(request, 'store/cart.html', context = context)
 
 # AJAX call
+# Creates cart if it doesn't exist in database cache, then adds item to cart
+# Refreshes cart's expiration timer, 10 minutes till expiration
 def addToCart(request, item_id):
     key = request.session.session_key
     item = get_object_or_404(Item, pk=item_id)
-    # Create cart if it doesn't exist, then add item to cart
     if cache.get(key) is None:
         cache.set(key, Cart())
     userCart = cache.get(key)
     userCart.add_item(item)
-    cache.set(key, userCart, 600) # Expire timer = 10 min
+    cache.set(key, userCart, 600)
     return HttpResponse("Yeees!")
