@@ -2,18 +2,20 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
+from django.core.cache import cache
 
 from django.db.models import Q
-from store.models import Item, carts
+from store.models import Item
 from store.cart import Cart
 
 def addItemToCart(item):
-    print("Cart adding was called")
-    key = "123"
-    if not key in carts:
-        carts[key] = Cart()
-    carts[key].add_item(item)
-    print(carts)
+    print("[LOCAL CACHE] Adding item to cart.")
+    if cache.get('123') is None:
+        cache.set('123', Cart())
+
+    x = cache.get('123')
+    x.add_item(item)
+    cache.set('123', x)
 
 
 class IndexView(ListView):
@@ -21,7 +23,6 @@ class IndexView(ListView):
     template_name = 'store/index.html'
 
     def get_queryset(self):
-        print(carts)
         #if not self.request.session.session_key:
         #    self.request.session.save()
 
@@ -57,11 +58,12 @@ def CartView(request):
     # Add cart to context if it exists
     #key = request.session.session_key
     key = "123"
-    print(len(carts))
+    #print(cache.get('123').cart)
+    #print(len(cache.get('123').cart))
     #print(key)
-    if key in carts.keys():
+    if not cache.get('123') is None:
         print("[INFO] Cart found!")
-        context = {'obj' : carts[key]}
+        context = {'obj' : cache.get('123')}
     else:
         print("[INFO] Cart NOT found!")
         context = {}
