@@ -15,6 +15,15 @@ carts['456'].add_item(item)
 print('Hardcoded values added')
 print(carts)
 
+def addItemToCart(item):
+    print("Cart adding was called")
+    key = "123"
+    if not key in carts:
+        carts[key] = Cart()
+    carts[key].add_item(item)
+    print(carts)
+
+
 class IndexView(ListView):
     model = Item
     template_name = 'store/index.html'
@@ -70,10 +79,11 @@ def CartView(request):
 # AJAX call
 def addToCart(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
+    addItemToCart(item)
     # Create cart if it doesn't exist, then add item to cart
     #key = request.session.session_key
-    key = "123"
-    if not key in carts:
-        carts[key] = Cart()
-    carts[key].add_item(item)
+    #key = "123"
+    #if not key in carts:
+    #    carts[key] = Cart()
+    #carts[key].add_item(item)
     return HttpResponse("Yeees!")
