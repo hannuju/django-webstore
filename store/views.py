@@ -21,8 +21,8 @@ class IndexView(ListView):
         return context
 
     # Initializes session by calling session.save() if it doesn't exists
-    # SQL-query "Like" by user's input to the search field
-    # Order by chosen radio button, default ordering by id if not chosen
+    # Does SQL-query "Like" for item id and title by user's input to the search field
+    # Orders by chosen radio button, default ordering by id if not chosen
     def get_queryset(self):
         if not self.request.session.session_key:
             self.request.session.save()
@@ -62,7 +62,7 @@ def CartView(request):
 # AJAX call
 # Creates cart for user if it doesn't exist, then adds item to user's cart
 # User's cart is searched in the database cache with session key
-# Refreshes cart's expiration timer, 10 minutes till expiration
+# Refreshes cart's expiration time and sets it to 10 minutes
 def addToCart(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
     key = request.session.session_key
@@ -75,7 +75,7 @@ def addToCart(request, item_id):
 
 # Deletes item from user's cart
 # User's cart is searched in the database cache with session key
-# Refreshes cart's expiration timer, 10 minutes till expiration
+# Refreshes cart's expiration time and sets it to 10 minutes
 def deleteFromCart(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
     key = request.session.session_key

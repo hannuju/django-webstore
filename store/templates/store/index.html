@@ -19,13 +19,12 @@
 
 <div class="container">
     {% if item_list %}
-    <table class="table table-with-button"> <!-- table-light table-striped table-hover -->
+    <table class="table table-with-button">
         <thead>
             <tr>
                 <th>Product ID#</th>
                 <th>Title</th>
                 <th>Price</th>
-
             </tr>
         </thead>
         <tbody>
@@ -47,4 +46,5 @@
     <hr>
     <a class="btn btn-primary" href="{% url 'store:item-create' %}">Create new item</a><br><br>
 </div>
+
 {% endblock %}

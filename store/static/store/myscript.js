@@ -6,6 +6,7 @@ $(document).ready(function() {
     });
 
     // AJAX call for adding item to cart
+    // Triggers popover after successful response
     $(".add-to-cart-button").click(function() {
         let id = $(this).attr("value");
         fetch("/store/item/" + id + "/add_to_cart", {
@@ -30,7 +31,7 @@ $(document).ready(function() {
       $("[data-toggle='popover']").popover()
     })
 
-    // Hides popper in 1,5 seconds
+    // Hides popover in 1,5 seconds
     function popperHide() {
         setTimeout(function() {
             $(".cart").popover("hide");
