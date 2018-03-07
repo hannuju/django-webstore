@@ -4,14 +4,14 @@
 <div class="container">
     <h2>Cart</h2>
     {% if obj.cart %}
-    <table class="table table-light table-striped table-hover table-with-button">
+    <table class="table table-with-button"> <!-- table-light table-striped table-hover  -->
         <thead>
             <tr>
                 <th>Product ID#</th>
                 <th>Title</th>
                 <th>Quantity</th>
                 <th>Price</th>
-                <th></th>
+
             </tr>
         </thead>
         <tbody>
@@ -24,7 +24,7 @@
                 <td><a href="{% url 'store:delete-from-cart' key %}" class="btn btn-danger"><i class="material-icons">remove_shopping_cart</i></a></td>
             </tr>
             {% endfor %}
-            <tr>
+            <tr id="no-hover">
                 <td><b>Total</b></td>
                 <td></td>
                 <td><b>{{ obj.cartQty }}</b></td>

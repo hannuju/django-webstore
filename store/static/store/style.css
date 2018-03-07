@@ -1,5 +1,50 @@
-.table-with-button tr th:last-child,
+.navbar {
+    background-color: #0C3C26;
+}
+
+div nav a,
+div nav a .material-icons {
+    color: white;
+}
+
+div nav a:hover,
+div nav a .material-icons:hover {
+    color: #20AA76;
+}
+
+.btn-green {
+    background-color: #C9F0DD;
+}
+
+.material-icons  {
+    color: black;
+}
+
+table thead tr {
+    background-color: #20AA76;
+}
+
+table tr {
+    background-color: #C9F0DD;
+}
+
+table tr:nth-child(even) {
+    background-color: #bce0ce;
+}
+
+tbody tr:hover {
+    background-color: #9eedc7;
+}
+
 .table-with-button tr td:last-child {
     background-color: white;
     border: 0;
+}
+
+.clickable-cell {
+    cursor: pointer;
+}
+
+#no-hover {
+    background-color: #83eab8;
 }

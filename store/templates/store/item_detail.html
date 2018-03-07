@@ -3,25 +3,31 @@
 {% block body %}
 <div class="container">
     <h2>{{ item.title}}</h2>
-    <table class="table table-light table-striped table-with-button">
-        <tr>
-            <th>Product ID#</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th></th>
-        </tr>
-        <tr>
-            <td>{{ item.id }}</td>
-            <td>{{ item.description }}</td>
-            <td>{{ item.price }}</td>
-            <td>
-                <button class="btn btn-success add-to-cart-button" value="{{ item.id }}"><i class="material-icons">add_shopping_cart</i></button>
-            </td>
-        </tr>
+    <table class="table table-with-button"> <!-- table-light table-striped  -->
+        <thead>
+            <tr>
+                <th>Product ID#</th>
+                <th>Description</th>
+                <th>Price</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.price }}</td>
+                <td>
+                    <button class="btn btn-success add-to-cart-button" value="{{ item.id }}"><i class="material-icons">add_shopping_cart</i></button>
+                </td>
+            </tr>
+        </tbody>
     </table>
 </div>
 <div class="container">
-    <a class="btn btn-primary" href="{% url 'store:item-update' item.id %}">Update item</a>
-    <a class="btn btn-danger float-right" href="{% url 'store:item-delete' item.id %}">Delete item</a>
+    <div class="col-lg-9">
+        <a class="btn btn-primary" href="{% url 'store:item-update' item.id %}">Update item</a>
+        <a class="btn btn-danger float-right" href="{% url 'store:item-delete' item.id %}">Delete item</a>
+    </div>
 </div>
 {% endblock %}
