@@ -50,7 +50,8 @@ class ItemDelete(DeleteView):
     model = Item
     success_url = reverse_lazy('store:index')
 
-# Renders cart view with user's cart object if it exists in database cache
+# Renders cart view with user's cart if it exists
+# User's cart is searched in the database cache with session key
 def CartView(request):
     key = request.session.session_key
     context = {}
@@ -59,7 +60,8 @@ def CartView(request):
     return render(request, 'store/cart.html', context = context)
 
 # AJAX call
-# Creates cart if it doesn't exist in database cache, then adds item to user's cart
+# Creates cart for user if it doesn't exist, then adds item to user's cart
+# User's cart is searched in the database cache with session key
 # Refreshes cart's expiration timer, 10 minutes till expiration
 def addToCart(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
@@ -72,6 +74,7 @@ def addToCart(request, item_id):
     return HttpResponse(item.title)
 
 # Deletes item from user's cart
+# User's cart is searched in the database cache with session key
 # Refreshes cart's expiration timer, 10 minutes till expiration
 def deleteFromCart(request, item_id):
     item = get_object_or_404(Item, pk=item_id)

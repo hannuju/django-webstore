@@ -1,8 +1,4 @@
-.table-with-button tr th:last-child {
-    background-color: white;
-    border: 0;
-}
-
+.table-with-button tr th:last-child,
 .table-with-button tr td:last-child {
     background-color: white;
     border: 0;

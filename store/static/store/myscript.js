@@ -6,7 +6,7 @@ $(document).ready(function() {
     });
 
     // AJAX call for adding item to cart
-    $('.add-to-cart-button').click(function() {
+    $(".add-to-cart-button").click(function() {
         let id = $(this).attr("value");
         fetch("/store/item/" + id + "/add_to_cart", {
             credentials: "same-origin"
@@ -17,18 +17,24 @@ $(document).ready(function() {
             }
             throw new Error("Response was not ok");
         }).then((res) => {
-            $('.cart').attr('data-content', 'Item added to cart');
-            $('.cart').popover('toggle');
+            $(".cart").attr('data-content', 'Item added to cart');
+            $(".cart").popover("show");
             popperHide();
         }).catch((error) => {
             console.log("There was a problem fetching your information: ", error.message);
         });
     });
 
+    // Initialize popover
+    $(function () {
+      $("[data-toggle='popover']").popover()
+    })
+
     // Hides popper in 1,5 seconds
     function popperHide() {
         setTimeout(function() {
-            $('.cart').popover('hide');
+            $(".cart").popover("hide");
+            $(".cart").attr("data-content", "");
         }, 1500);
     }
 
