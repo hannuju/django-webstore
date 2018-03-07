@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block body %}
+
 <div class="container">
-    <p>{{ request.session.session_key }}</p>
     <form method="GET" action="">
         <div class="col-lg-5" >
             <input name="q" type="text" placeholder="Search..." value="{{ lastquery }}"/><br><br>
@@ -35,7 +35,7 @@
                 <td class="clickable-cell" data-href="{% url 'store:item-detail' item.id %}">{{ item.title }}</a></td>
                 <td class="clickable-cell" data-href="{% url 'store:item-detail' item.id %}">{{ item.price}}</td>
                 <td>
-                    <button class="btn btn-success add-to-cart-button" value="{{ item.id }}"><i class="material-icons">add_shopping_cart</i></button>
+                    <button class="btn btn-success add-to-cart-button cart-popover" value="{{ item.id }}"><i class="material-icons">add_shopping_cart</i></button>
                 </td>
             </tr>
             {% endfor %}

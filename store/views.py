@@ -59,7 +59,7 @@ def CartView(request):
     return render(request, 'store/cart.html', context = context)
 
 # AJAX call
-# Creates cart if it doesn't exist in database cache, then adds item to cart
+# Creates cart if it doesn't exist in database cache, then adds item to user's cart
 # Refreshes cart's expiration timer, 10 minutes till expiration
 def addToCart(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
@@ -69,16 +69,14 @@ def addToCart(request, item_id):
     userCart = cache.get(key)
     userCart.add_item(item)
     cache.set(key, userCart, 600)
-    return HttpResponse("Yeees!")
+    return HttpResponse(item.title)
 
+# Deletes item from user's cart
+# Refreshes cart's expiration timer, 10 minutes till expiration
 def deleteFromCart(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
     key = request.session.session_key
-    if cache.get(key) is None:
-        print("only possible by typing url")
     userCart = cache.get(key)
     userCart.delete_item(item)
     cache.set(key, userCart, 600)
-    #context = {'obj' : cache.get(key)}
     return HttpResponseRedirect('/store/cart')
-    #return render(request, 'store/cart.html', context = context)

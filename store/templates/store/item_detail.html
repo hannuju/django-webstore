@@ -21,7 +21,7 @@
     </table>
 </div>
 <div class="container">
-    <a class="btn btn-primary" href="update">Update item</a>
-    <a class="btn btn-danger float-right" href="delete">Delete item</a>
+    <a class="btn btn-primary" href="{% url 'store:item-update' item.id %}">Update item</a>
+    <a class="btn btn-danger float-right" href="{% url 'store:item-delete' item.id %}">Delete item</a>
 </div>
 {% endblock %}

@@ -9,7 +9,6 @@ App deployed to Heroku: https://django-webstore.herokuapp.com/store/
 - Python 3.6 runtime environment
 - Django Web Framework
 - JawsDB MySQL
-- Heroku Django Starter Template
 
 ## How to Use
 
