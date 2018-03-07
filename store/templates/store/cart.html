@@ -24,7 +24,7 @@
                 <td><a href="{% url 'store:delete-from-cart' key %}" class="btn btn-danger"><i class="material-icons">remove_shopping_cart</i></a></td>
             </tr>
             {% endfor %}
-            <tr id="no-hover">
+            <tr id="cart-last-row">
                 <td><b>Total</b></td>
                 <td></td>
                 <td><b>{{ obj.cartQty }}</b></td>
