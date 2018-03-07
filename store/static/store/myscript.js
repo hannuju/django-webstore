@@ -8,7 +8,7 @@ $(document).ready(function() {
     // AJAX call for adding item to cart
     $('.add-to-cart-button').click(function() {
         fetch("/store/item/" + $(this).attr("value") + "/add_to_cart", {
-            credentials: "include"
+            credentials: "same-origin"
         })
         .then((response) => {
             if(response.ok) {

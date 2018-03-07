@@ -5,7 +5,9 @@
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input class="btn btn-primary" type="submit" value="Create item" />
+        <input class="btn btn-primary" type="submit" value="Confirm" />
     </form>
+    <br>
+    <a href="{% url 'store:index' %}" >Back</a>
 </div>
 {% endblock %}

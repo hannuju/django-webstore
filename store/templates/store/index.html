@@ -2,6 +2,7 @@
 
 {% block body %}
 <div class="container">
+    <p>{{ request.session.session_key }}</p>
     <form method="GET" action="">
         <div class="col-lg-5" >
             <input name="q" type="text" placeholder="Search..." value="{{ lastquery }}"/><br><br>
@@ -30,9 +31,9 @@
         <tbody>
             {% for item in item_list %}
             <tr>
-                <td class="clickable-cell" data-href="{% url 'store:detail' item.id %}">{{ item.id }}</td>
-                <td class="clickable-cell" data-href="{% url 'store:detail' item.id %}">{{ item.title }}</a></td>
-                <td class="clickable-cell" data-href="{% url 'store:detail' item.id %}">{{ item.price}}</td>
+                <td class="clickable-cell" data-href="{% url 'store:item-detail' item.id %}">{{ item.id }}</td>
+                <td class="clickable-cell" data-href="{% url 'store:item-detail' item.id %}">{{ item.title }}</a></td>
+                <td class="clickable-cell" data-href="{% url 'store:item-detail' item.id %}">{{ item.price}}</td>
                 <td>
                     <button class="btn btn-success add-to-cart-button" value="{{ item.id }}"><i class="material-icons">add_shopping_cart</i></button>
                 </td>
@@ -44,6 +45,6 @@
     <p>No items found!</p>
     {% endif %}
     <hr>
-    <a class="btn btn-primary" href="item/create">Create new item</a><br><br>
+    <a class="btn btn-primary" href="{% url 'store:item-create' %}">Create new item</a><br><br>
 </div>
 {% endblock %}

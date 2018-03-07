@@ -17,10 +17,10 @@
         <tbody>
             {% for key, value in obj.cart.items %}
             <tr>
-                <td class="clickable-cell" data-href="{% url 'store:detail' key %}">{{ key }}</th>
-                <td class="clickable-cell" data-href="{% url 'store:detail' key %}">{{ value.title }}</td>
-                <td class="clickable-cell" data-href="{% url 'store:detail' key %}">{{ value.quantity }}</td>
-                <td class="clickable-cell" data-href="{% url 'store:detail' key %}">{{ value.price }}</td>
+                <td class="clickable-cell" data-href="{% url 'store:item-detail' key %}">{{ key }}</th>
+                <td class="clickable-cell" data-href="{% url 'store:item-detail' key %}">{{ value.title }}</td>
+                <td class="clickable-cell" data-href="{% url 'store:item-detail' key %}">{{ value.quantity }}</td>
+                <td class="clickable-cell" data-href="{% url 'store:item-detail' key %}">{{ value.price }}</td>
                 <td><a href="{% url 'store:delete-from-cart' key %}" class="btn btn-danger"><i class="material-icons">remove_shopping_cart</i></a></td>
             </tr>
             {% endfor %}
