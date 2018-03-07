@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.core.cache import cache
 
@@ -63,11 +63,23 @@ def CartView(request):
 # Creates cart if it doesn't exist in database cache, then adds item to cart
 # Refreshes cart's expiration timer, 10 minutes till expiration
 def addToCart(request, item_id):
-    key = request.session.session_key
     item = get_object_or_404(Item, pk=item_id)
+    key = request.session.session_key
     if cache.get(key) is None:
         cache.set(key, Cart())
     userCart = cache.get(key)
     userCart.add_item(item)
     cache.set(key, userCart, 600)
     return HttpResponse("Yeees!")
+
+def deleteFromCart(request, item_id):
+    item = get_object_or_404(Item, pk=item_id)
+    key = request.session.session_key
+    if cache.get(key) is None:
+        print("only possible by typing url")
+    userCart = cache.get(key)
+    userCart.delete_item(item)
+    cache.set(key, userCart, 600)
+    #context = {'obj' : cache.get(key)}
+    return HttpResponseRedirect('/store/cart')
+    #return render(request, 'store/cart.html', context = context)

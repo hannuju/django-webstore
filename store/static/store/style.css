@@ -1,9 +1,9 @@
-.row-with-button > td:last-child {
+.table-with-button tr th:last-child {
     background-color: white;
     border: 0;
 }
 
-.row-with-button > th:last-child {
+.table-with-button tr td:last-child {
     background-color: white;
     border: 0;
 }

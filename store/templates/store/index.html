@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block body %}
-
 <div class="container">
     <form method="GET" action="">
         <div class="col-lg-5" >
@@ -13,69 +12,38 @@
             <input type="radio" name="qq" value="title">Title<br>
             <input type="radio" name="qq" value="price">Price<br><br>
         </div>
-        <button type="submit">Apply</button>
+        <button class="btn btn-light" type="submit">Apply</button>
     </form><br>
 </div>
 
 <div class="container">
     {% if item_list %}
-    <table class="table table-dark table-striped table-hover">
-        <tr class="row-with-button">
-            <th>Product ID#</th>
-            <th>Title</th>
-            <th>Price</th>
-            <th></th>
-        </tr>
-        {% for item in item_list %}
-        <tr class="row-with-button">
-            <td class="clickable-cell" data-href="{% url 'store:detail' item.id %}">{{ item.id }}</td>
-            <td class="clickable-cell" data-href="{% url 'store:detail' item.id %}">{{ item.title }}</a></td>
-            <td class="clickable-cell" data-href="{% url 'store:detail' item.id %}">{{ item.price}}</td>
-            <td>
-                <button class="my_button" name="buttonName" value="{{ item.id }}">Add to cart</button>
-            </td>
-        </tr>
-        {% endfor %}
+    <table class="table table-light table-striped table-hover table-with-button">
+        <thead>
+            <tr>
+                <th>Product ID#</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in item_list %}
+            <tr>
+                <td class="clickable-cell" data-href="{% url 'store:detail' item.id %}">{{ item.id }}</td>
+                <td class="clickable-cell" data-href="{% url 'store:detail' item.id %}">{{ item.title }}</a></td>
+                <td class="clickable-cell" data-href="{% url 'store:detail' item.id %}">{{ item.price}}</td>
+                <td>
+                    <button class="btn btn-success add-to-cart-button" value="{{ item.id }}"><i class="material-icons">add_shopping_cart</i></button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
     {% else %}
     <p>No items found!</p>
     {% endif %}
-
     <hr>
-    <a href="item/add">Add new item</a>
-    <br><br>
-
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $('.my_button').click(function() {
-            fetch("/store/item/" + $(this).attr("value") + "/add_to_cart", {
-                credentials: "include"
-            })
-            .then((response) => {
-                if(response.ok) {
-                    return response;
-                }
-                throw new Error("Response was not ok");
-            }).then((myBlob) => {
-                console.log(myBlob.text());
-            }).catch((error) => {
-                console.log("There was a problem fetching your information: ", error.message);
-            });
-        });
-    });
-    </script>
-
-    <script type="text/javascript">
-    $(document).ready(function($) {
-        $(".clickable-cell").click(function() {
-            window.location = $(this).data("href");
-        });
-    });
-    </script>
-
+    <a class="btn btn-primary" href="item/create">Create new item</a><br><br>
 </div>
 {% endblock %}
-<!--fetch("http://127.0.0.1:8000/store/item" + id + "/add_to_cart")
-alert($(this).attr("value"));
-.then(response => console.log('Success:', response.text()));
--->

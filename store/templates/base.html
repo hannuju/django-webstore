@@ -7,29 +7,27 @@
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
         <script
         src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
         crossorigin="anonymous">
         </script>
+        <script src="{% static 'store/myscript.js' %}"></script>
         {% block head %}
         <title>Store</title>
         {% endblock %}
     </head>
     <body>
         <div class="container">
-            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <nav class="navbar navbar-expand-sm navbar-light bg-light">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" href="/store">Store</a>
-                    <a class="nav-item nav-link" href="/store/cart">Cart</a>
+                    <a class="nav-item nav-link" href="/store/cart"><i class="material-icons">shopping_cart</i></a>
                 </div>
             </nav>
         </div><br>
         {% block body %}
         {% endblock %}
-
-        {% load static %}
-        <!--<script src="{% static 'store/myscript.js' %}"></script>-->
-
     </body>
 </html>

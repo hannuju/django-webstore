@@ -3,20 +3,25 @@
 {% block body %}
 <div class="container">
     <h2>{{ item.title}}</h2>
-    <table class="table table-dark table-striped table-bordered">
+    <table class="table table-light table-striped table-with-button">
         <tr>
             <th>Product ID#</th>
             <th>Description</th>
             <th>Price</th>
+            <th></th>
         </tr>
         <tr>
             <td>{{ item.id }}</td>
             <td>{{ item.description }}</td>
             <td>{{ item.price }}</td>
+            <td>
+                <button class="btn btn-success add-to-cart-button" value="{{ item.id }}"><i class="material-icons">add_shopping_cart</i></button>
+            </td>
         </tr>
     </table>
-    <hr>
-    <a href="update">Update item</a><br>
-    <a href="delete">Delete item</a>
+</div>
+<div class="container">
+    <a class="btn btn-primary" href="update">Update item</a>
+    <a class="btn btn-danger float-right" href="delete">Delete item</a>
 </div>
 {% endblock %}

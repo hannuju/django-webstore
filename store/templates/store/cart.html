@@ -4,27 +4,34 @@
 <div class="container">
     <h2>Cart</h2>
     {% if obj.cart %}
-    <table class="table table-dark table-striped table-bordered">
-        <tr>
-            <th>Product ID#</th>
-            <th>Title</th>
-            <th>Quantity</th>
-            <th>Price</th>
-        </tr>
-        {% for key, value in obj.cart.items %}
-        <tr>
-            <td>{{ key }}</th>
-            <td>{{ value.title }}</td>
-            <td>{{ value.quantity }}</td>
-            <td>{{ value.price }}</td>
-        </tr>
-        {% endfor %}
-        <tr>
-            <td>Total</td>
-            <td></td>
-            <td>{{ obj.cartQty }}</td>
-            <td>{{ obj.cartPrice }}</td>
-        </tr>
+    <table class="table table-light table-striped table-hover table-with-button">
+        <thead>
+            <tr>
+                <th>Product ID#</th>
+                <th>Title</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, value in obj.cart.items %}
+            <tr>
+                <td class="clickable-cell" data-href="{% url 'store:detail' key %}">{{ key }}</th>
+                <td class="clickable-cell" data-href="{% url 'store:detail' key %}">{{ value.title }}</td>
+                <td class="clickable-cell" data-href="{% url 'store:detail' key %}">{{ value.quantity }}</td>
+                <td class="clickable-cell" data-href="{% url 'store:detail' key %}">{{ value.price }}</td>
+                <td><a href="{% url 'store:delete-from-cart' key %}" class="btn btn-danger"><i class="material-icons">remove_shopping_cart</i></a></td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td><b>Total</b></td>
+                <td></td>
+                <td><b>{{ obj.cartQty }}</b></td>
+                <td><b>{{ obj.cartPrice }}</b></td>
+                <td></td>
+            </tr>
+        </tbody>
     </table>
     {% else %}
     <p>Your cart is empty</p>
